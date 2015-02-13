@@ -1,5 +1,7 @@
 package com.redis.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -132,8 +134,21 @@ public class JedisList
         JedisPool pool = new JedisPool(new JedisPoolConfig(), HOST);
         Jedis jedis = pool.getResource();
         jedis.auth("root");
-        jedis.flushDB();
+        jedis.hincrBy("myTest_id", "province_1", 1);
+        jedis.hincrBy("myTest_id", "city_1", 1);
+        System.out.println(jedis.hgetAll("myTest_id"));
+
+        SimpleDateFormat foo = new SimpleDateFormat("yyyyMMdd");
+        System.out.println("foo:"+foo.format(new Date()));
         
+       System.out.println(jedis.zincrby("test", 1, "20150213"));
+       
+       
+       System.out.println("---->"+jedis.zrangeByScore("test",1,20,1,3));
+        
+       // System.out.println(jedis.zincrby("data_zincr", 1, "1003"));
+       // jedis.flushDB();
+//        
         Set keys = jedis.keys("*");// 列出所有的key，查找特定的key如：redis.keys("foo")
         Iterator t1 = keys.iterator();
         while (t1.hasNext())

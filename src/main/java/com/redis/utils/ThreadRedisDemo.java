@@ -11,10 +11,14 @@ public class ThreadRedisDemo extends Thread
 
         super(name);
     }
+    
+  
 
     public static void main(String[] args)
     {
 
+       
+        
         ThreadRedisDemo m1 = new ThreadRedisDemo("阿三_");
         m1.start();
         ThreadRedisDemo m2 = new ThreadRedisDemo("李四_");
